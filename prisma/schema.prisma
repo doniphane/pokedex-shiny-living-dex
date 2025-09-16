@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  capturedPokemon CapturedPokemon[]
+
+  @@map("users")
+}
+
+model Pokemon {
+  id         Int      @id
+  name       String
+  height     Int
+  weight     Int
+  baseExp    Int      @map("base_experience")
+  types      Json
+  abilities  Json
+  stats      Json
+  sprites    Json
+  generation Int
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("pokemon")
+}
+
+model CapturedPokemon {
+  id           String   @id @default(uuid())
+  pokemonId    Int      @map("pokemon_id")
+  pokemonName  String   @map("pokemon_name")
+  pokemonImage String   @map("pokemon_image")
+  pokemonTypes Json     @map("pokemon_types")
+  capturedAt   DateTime @default(now()) @map("captured_at")
+
+  // Relations
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("captured_pokemon")
+}
