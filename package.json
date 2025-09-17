@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start -p 3004",
     "lint": "next lint",
     "db:generate": "prisma generate",
@@ -14,7 +14,10 @@
     "db:seed": "prisma db seed",
     "setup": "node setup.js",
     "validate-env": "node scripts/validate-env.js",
-    "deploy:check": "npm run validate-env && npm run build",
+    "deploy:check": "npm run validate-env && npm run db:generate && npm run build",
+    "postinstall": "prisma generate",
+    "fix-prisma": "node scripts/fix-prisma-server.js",
+    "deploy:server": "npm run fix-prisma && npm run build",
     "sync:pokemon": "node scripts/sync-pokemon.js"
   },
   "dependencies": {
