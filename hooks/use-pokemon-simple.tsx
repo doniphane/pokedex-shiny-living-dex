@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { POKEMON_GENERATIONS, TOTAL_POKEMON } from '@/lib/pokemon-db-service'
+import { POKEMON_GENERATIONS, TOTAL_POKEMON } from '@/lib/pokemon-constants'
 
 export interface Pokemon {
   id: number

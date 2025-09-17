@@ -11,8 +11,17 @@ const nextConfig = {
     domains: ['raw.githubusercontent.com'], // Pour les images Pokemon
   },
   // Optimisation pour Vercel
-  experimental: {
-    serverComponentsExternalPackages: ['@prisma/client'],
+  serverExternalPackages: ['@prisma/client'],
+  // Force server-side pour les modules Prisma
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        '@prisma/client': false,
+        '.prisma/client': false,
+      }
+    }
+    return config
   },
   // Headers de sécurité
   async headers() {

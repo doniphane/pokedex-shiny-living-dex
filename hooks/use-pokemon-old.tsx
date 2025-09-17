@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect, useCallback } from 'react'
-import { pokemonDBService, Pokemon, POKEMON_GENERATIONS, TOTAL_POKEMON } from '@/lib/pokemon-db-service'
+import { pokemonDBService } from '@/lib/pokemon-db-service'
+import { Pokemon, POKEMON_GENERATIONS, TOTAL_POKEMON } from '@/lib/pokemon-constants'
 
 interface UsePokemonOptions {
   generations?: number[]

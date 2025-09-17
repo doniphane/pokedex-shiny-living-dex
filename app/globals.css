@@ -10,6 +10,51 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Animation delays pour les effets sparkles */
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+
+  /* Animation personnalisée pour la transformation shiny */
+  @keyframes shiny-transform {
+    0% {
+      transform: scale(1) rotate(0deg);
+      filter: brightness(1) saturate(1);
+    }
+    50% {
+      transform: scale(1.1) rotate(5deg);
+      filter: brightness(1.2) saturate(1.5);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      filter: brightness(1.1) saturate(1.25);
+    }
+  }
+
+  .animate-shiny-transform {
+    animation: shiny-transform 0.8s ease-in-out;
+  }
+
+  /* Animation pour les sparkles flottants */
+  @keyframes float-sparkle {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(-10px) rotate(180deg);
+      opacity: 1;
+    }
+  }
+
+  .animate-float-sparkle {
+    animation: float-sparkle 2s ease-in-out infinite;
+  }
 }
 
 @layer base {
